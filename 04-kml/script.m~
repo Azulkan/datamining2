@@ -1,0 +1,70 @@
+% TP4 : MKL
+clear all; clc; close all;
+%%
+
+% Chargement des données
+load('Data5mixture.mat');
+Xapp = mixtureexampleTRAIN(1:400);
+Xapp = reshape(Xapp, 200, 2);
+yapp = [ones(100, 1); -ones(100, 1)];
+Xt = mixtureexampleTEST1(1:2*6831);
+Xt = reshape(Xt, 6831, 2);
+yt = -sign(mixtureexamplePtest - 0.5);
+prob = mixtureexamplePtest;
+nt = length(yt);
+marg = mixtureexampleMarg;
+
+% Visualisation
+plot(Xapp(:, 1), Xapp(:, 2), '*')
+
+
+
+%% 2. 
+%% A) Gaussian kernel with b = .1 and C = 100
+kernel = 'gaussian';
+kerneloption1 = .1;
+K1 = svmkernel(Xapp ,kernel, kerneloption1);
+G1 = (yapp*yapp').* K1;
+C = 100;
+lambda = 1e-12;
+[n,~] = size(Xapp);
+e = ones(n, 1) ;
+[alpha, b, pos ] = monqp(G1, e, yapp, 0, C, lambda, 0);
+Kt1 = svmkernel(Xt, kernel, kerneloption1, Xapp(pos,:));
+ypred = Kt1*(yapp(pos).*alpha) + b ;
+nerr = 100*length(find(yt.*ypred<0)) / (nt);
+
+
+%% B) 
+
+kerneloption2 = .5;
+K2 = svmkernel ( Xapp , kernel , kerneloption2 ) ;
+G2 = ( yapp * yapp') .* K2 ;
+[ alpha ,b , pos ] = monqp ( G2 ,e , yapp ,0 ,C , lambda ,0) ;
+Kt2 = svmkernel ( Xt , kernel , kerneloption2 , Xapp ( pos ,:) ) ;
+ypred = Kt2 *( yapp ( pos ) .* alpha ) + b ;
+nerr = 100* length ( find ( yt .* ypred <0) ) /( nt ) ;
+
+%% C)
+kerneloption3 = 5;
+K3 = svmkernel ( Xapp , kernel , kerneloption3 ) ;
+G3 = ( yapp * yapp') .* K3 ;
+[ alpha ,b , pos ] = monqp ( G3 ,e , yapp ,0 ,C , lambda ,0) ;
+Kt3 = svmkernel ( Xt , kernel , kerneloption3 , Xapp ( pos ,:) ) ;
+ypred = Kt3 *( yapp ( pos ) .* alpha ) + b ;
+nerr = 100* length ( find ( yt .* ypred <0) ) /( nt ) ;
+
+
+%% 3)
+%% A
+
+%% B)
+
+%% C)
+
+%% D)
+
+%% 4)
+%% A)
+
+%% B)
