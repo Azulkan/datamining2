@@ -1,0 +1,308 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>tp1</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-01"><meta name="DC.source" content="tp1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">TP1 - Noyaux</a></li><li><a href="#2">1. On charge les donn&eacute;es</a></li><li><a href="#3">2. Visualisation des donn&eacute;es</a></li><li><a href="#4">4. Grille pour la visualisation</a></li><li><a href="#5">5. Calcul du potentiel</a></li><li><a href="#6">6. Visualisation du potentiel</a></li><li><a href="#7">7. Influence du param&egrave;tre b</a></li><li><a href="#8">8.</a></li><li><a href="#9">9. Fonction rationnelle (et non exponentielle)</a></li><li><a href="#10">10.</a></li><li><a href="#11">Nombre d'erreurs</a></li></ul></div><h2>TP1 - Noyaux<a name="1"></a></h2><p>Le but du TP est de d&#8217;illustrer l&#8217;importance des noyaux.</p><pre class="codeinput">clear <span class="string">all</span>; close <span class="string">all</span>; clc;
+</pre><h2>1. On charge les donn&eacute;es<a name="2"></a></h2><pre class="codeinput">load <span class="string">data_classif</span>;
+</pre><h2>2. Visualisation des donn&eacute;es<a name="3"></a></h2><pre class="codeinput">ip = find(yi==1);
+im = find(yi == -1);
+
+figure();
+set(gcf, <span class="string">'Color'</span>,[1,1,1])
+plot(xi(ip,1), xi(ip,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">on</span>
+plot(xi(im,1), xi(im,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'c'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="tp1_01.png" alt=""> <h2>4. Grille pour la visualisation<a name="4"></a></h2><pre class="codeinput">[xtest1, xtest2] = meshgrid([0:.0125:1],[0:.0125:1]);
+</pre><h2>5. Calcul du potentiel<a name="5"></a></h2><pre class="codeinput">nn = length(xtest1);
+Xtest = [reshape(xtest1 ,nn*nn,1) reshape(xtest2 ,nn*nn,1)];
+<span class="keyword">for</span> i=1:length(Xtest)
+    yp(i) = pred(Xtest(i,:), xi, yi);
+<span class="keyword">end</span>
+</pre><h2>6. Visualisation du potentiel<a name="6"></a></h2><pre class="codeinput">ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,<span class="string">'Color'</span>,[1,1,1])
+colormap(<span class="string">'gray'</span>);
+contourf(xtest1,xtest2,ypred,50);
+shading <span class="string">flat</span>;
+hold <span class="string">on</span>
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],<span class="string">'y-'</span>,<span class="string">'LineWidth'</span>,2);
+colormap(<span class="string">'winter'</span>);
+colorbar
+plot(xi(ip,1), xi(ip,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">on</span>
+plot(xi(im,1), xi(im,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'c'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="tp1_02.png" alt=""> <h2>7. Influence du param&egrave;tre b<a name="7"></a></h2><p>On remarque que les potentiels sont les plus forts (en valeur absolue) l&agrave; o&ugrave; on a le plus de points de la m&ecirc;me classe proches.</p><p>Lorsque l'on fait varier b, on fait changer l'&eacute;cart accept&eacute; pour le regroupement des points.</p><p>En augmentant b par exemple, la distance accept&eacute;e devient plus grande, et donc on a moins de regroupements. On tend alors vers un mod&egrave;le lin&eacute;aire.</p><p>En revanche, pour un b plus petit, le mod&egrave;le devient plus pr&eacute;cis, avec des variations de potentiel plus fortes. On colle trop au mod&egrave;le, et donc on n'a aucune marge de manoeuvre pour des pr&eacute;dictions sur des donn&eacute;es de test.</p><h2>8.<a name="8"></a></h2><pre class="codeinput">figure()
+t = -10:0.1:10;
+plot(t,exp(-t.^2/0.1))
+hold <span class="string">on</span>
+plot(t,exp(-t.^2/0.01),<span class="string">'r'</span>)
+plot(t,exp(-t.^2/1),<span class="string">'g'</span>)
+plot(t,exp(-t.^2/10),<span class="string">'m'</span>)
+</pre><img vspace="5" hspace="5" src="tp1_03.png" alt=""> <h2>9. Fonction rationnelle (et non exponentielle)<a name="9"></a></h2><pre class="codeinput">nn = length(xtest1);
+Xtest = [reshape(xtest1 ,nn*nn,1) reshape(xtest2 ,nn*nn,1)];
+<span class="keyword">for</span> i=1:length(Xtest)
+    yp(i) = predRationnel(Xtest(i,:), xi, yi);
+<span class="keyword">end</span>
+
+ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,<span class="string">'Color'</span>,[1,1,1])
+colormap(<span class="string">'gray'</span>);
+contourf(xtest1,xtest2,ypred,50);
+shading <span class="string">flat</span>;
+hold <span class="string">on</span>
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],<span class="string">'y-'</span>,<span class="string">'LineWidth'</span>,2);
+colormap(<span class="string">'winter'</span>);
+colorbar
+plot(xi(ip,1), xi(ip,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">on</span>
+plot(xi(im,1), xi(im,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'c'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">off</span>
+
+<span class="comment">% En comparant par rapport &agrave; la fonction exponentielle, on remarque qu'il</span>
+<span class="comment">% faut un b plus petit pour atteindre une s&eacute;paration acceptable.</span>
+</pre><img vspace="5" hspace="5" src="tp1_04.png" alt=""> <h2>10.<a name="10"></a></h2><pre class="codeinput">b = 0.2;
+K = calculNoyau(xi,b);
+a = learn( K, yi);
+<span class="keyword">for</span> i=1:length(Xtest)
+    yp(i) = preda(Xtest(i,:), xi, b, a);
+<span class="keyword">end</span>
+
+ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,<span class="string">'Color'</span>,[1,1,1])
+colormap(<span class="string">'gray'</span>);
+contourf(xtest1,xtest2,ypred,50);
+shading <span class="string">flat</span>;
+hold <span class="string">on</span>
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],<span class="string">'y-'</span>,<span class="string">'LineWidth'</span>,2);
+colormap(<span class="string">'winter'</span>);
+colorbar
+plot(xi(ip,1), xi(ip,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'m'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">on</span>
+plot(xi(im,1), xi(im,2),<span class="string">'o'</span>, <span class="string">'MarkerFaceColor'</span>,<span class="string">'c'</span>, <span class="keyword">...</span>
+    <span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>, <span class="string">'MarkerSize'</span>,15);
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="tp1_05.png" alt=""> <h2>Nombre d'erreurs<a name="11"></a></h2><pre class="codeinput"><span class="keyword">for</span> i=1:length(xi)
+    ybase(i) = preda(xi(i,:), xi, b, a);
+<span class="keyword">end</span>
+ybase = ybase';
+err = sum(sign(ybase) ~= yi);
+display(<span class="string">'Nombre de points mal class&eacute;s : '</span>); display(err);
+</pre><pre class="codeoutput">Nombre de points mal class&eacute;s : 
+
+err =
+
+     5
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% TP1 - Noyaux
+% Le but du TP est de d’illustrer l’importance des noyaux.
+
+clear all; close all; clc;
+
+%% 1. On charge les données
+load data_classif;
+
+%% 2. Visualisation des données
+ip = find(yi==1);
+im = find(yi == -1);
+
+figure();
+set(gcf, 'Color',[1,1,1])
+plot(xi(ip,1), xi(ip,2),'o', 'MarkerFaceColor','r', ...
+    'MarkerEdgeColor','m', 'MarkerSize',15);
+hold on
+plot(xi(im,1), xi(im,2),'o', 'MarkerFaceColor','c', ...
+    'MarkerEdgeColor','b', 'MarkerSize',15);
+hold off
+
+%% 4. Grille pour la visualisation
+[xtest1, xtest2] = meshgrid([0:.0125:1],[0:.0125:1]);
+
+%% 5. Calcul du potentiel
+nn = length(xtest1);
+Xtest = [reshape(xtest1 ,nn*nn,1) reshape(xtest2 ,nn*nn,1)];
+for i=1:length(Xtest)
+    yp(i) = pred(Xtest(i,:), xi, yi);
+end
+
+%% 6. Visualisation du potentiel
+ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,'Color',[1,1,1])
+colormap('gray');
+contourf(xtest1,xtest2,ypred,50);
+shading flat;
+hold on
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],'y-','LineWidth',2);
+colormap('winter');
+colorbar
+plot(xi(ip,1), xi(ip,2),'o', 'MarkerFaceColor','r', ...
+    'MarkerEdgeColor','m', 'MarkerSize',15);
+hold on
+plot(xi(im,1), xi(im,2),'o', 'MarkerFaceColor','c', ...
+    'MarkerEdgeColor','b', 'MarkerSize',15);
+hold off
+%% 7. Influence du paramètre b
+% On remarque que les potentiels sont les plus forts (en valeur absolue) là
+% où on a le plus de points de la même classe proches.
+% 
+% Lorsque l'on fait varier b, on fait changer l'écart accepté pour le
+% regroupement des points.
+%
+% En augmentant b par exemple, la distance acceptée devient plus
+% grande, et donc on a moins de regroupements. On tend alors vers un modèle
+% linéaire.
+%
+% En revanche, pour un b plus petit, le modèle devient plus précis, avec
+% des variations de potentiel plus fortes. On colle trop au modèle, et donc
+% on n'a aucune marge de manoeuvre pour des prédictions sur des données de
+% test.
+
+%% 8. 
+figure()
+t = -10:0.1:10;
+plot(t,exp(-t.^2/0.1))
+hold on
+plot(t,exp(-t.^2/0.01),'r')
+plot(t,exp(-t.^2/1),'g')
+plot(t,exp(-t.^2/10),'m')
+
+%% 9. Fonction rationnelle (et non exponentielle)
+nn = length(xtest1);
+Xtest = [reshape(xtest1 ,nn*nn,1) reshape(xtest2 ,nn*nn,1)];
+for i=1:length(Xtest)
+    yp(i) = predRationnel(Xtest(i,:), xi, yi);
+end
+
+ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,'Color',[1,1,1])
+colormap('gray');
+contourf(xtest1,xtest2,ypred,50);
+shading flat;
+hold on
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],'y-','LineWidth',2);
+colormap('winter');
+colorbar
+plot(xi(ip,1), xi(ip,2),'o', 'MarkerFaceColor','r', ...
+    'MarkerEdgeColor','m', 'MarkerSize',15);
+hold on
+plot(xi(im,1), xi(im,2),'o', 'MarkerFaceColor','c', ...
+    'MarkerEdgeColor','b', 'MarkerSize',15);
+hold off
+
+% En comparant par rapport à la fonction exponentielle, on remarque qu'il
+% faut un b plus petit pour atteindre une séparation acceptable.
+
+%% 10. 
+b = 0.2;
+K = calculNoyau(xi,b);
+a = learn( K, yi);
+for i=1:length(Xtest)
+    yp(i) = preda(Xtest(i,:), xi, b, a);
+end
+
+ypred = reshape(yp ,nn,nn);
+figure();
+set(gcf,'Color',[1,1,1])
+colormap('gray');
+contourf(xtest1,xtest2,ypred,50);
+shading flat;
+hold on
+[cc, hh]= contour (xtest1,xtest2,ypred,[0 0],'y-','LineWidth',2);
+colormap('winter');
+colorbar
+plot(xi(ip,1), xi(ip,2),'o', 'MarkerFaceColor','r', ...
+    'MarkerEdgeColor','m', 'MarkerSize',15);
+hold on
+plot(xi(im,1), xi(im,2),'o', 'MarkerFaceColor','c', ...
+    'MarkerEdgeColor','b', 'MarkerSize',15);
+hold off
+
+%% Nombre d'erreurs
+for i=1:length(xi)
+    ybase(i) = preda(xi(i,:), xi, b, a);
+end
+ybase = ybase';
+err = sum(sign(ybase) ~= yi);
+display('Nombre de points mal classés : '); display(err);
+
+
+##### SOURCE END #####
+--></body></html>
