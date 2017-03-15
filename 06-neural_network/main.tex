@@ -1,0 +1,90 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{textcomp}
+\usepackage{bm}
+\usepackage{xspace}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\usepackage{graphicx}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[symbol*]{footmisc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{paralist}
+\usepackage{upgreek}
+\usepackage[tight]{subfigure}
+\hypersetup{
+  colorlinks,
+  citecolor=red,
+  filecolor=black,
+  linkcolor=blue,
+  urlcolor=black
+}
+
+\usepackage[hmargin=20mm,vmargin={20mm,30mm}]{geometry}
+
+\usepackage[section]{placeins}
+\bibliographystyle{plain}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,patterns,calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\newcommand\Mycomb[2][n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\title{\HRule{1.5mm} \\[0.4cm] \textbf{Hands on Lab 1\\
+{\small A Gentle and Practical Introduction to Neural Networks}}\\ \HRule{0.5mm} \\[0.4cm]}
+
+\author[1]{First name Family name \footnote{\texttt{fn.fn@insa-rouen.fr}}}
+
+\affil[1]{Normandie Univ, UNIROUEN, INSA Rouen, LITIS, 76000 Rouen, France.}
+
+
+\date{March, XX$^{th}$.2017}
+
+\input{./notations}
+
+
+\begin{document}
+\maketitle 
+
+\begin{abstract}
+  You will perform in this lab the classification task using neural network models. First, you will use existing libraries where everything is ready to use (Keras\footnote{\url{https://keras.io/}}). Next, you will build your own neural networks and train them using Theano\footnote{\url{http://deeplearning.net/software/theano/}}. Provide the result that you find.
+  
+  \textcolor{red}{Keep your code clean and modular as possible. You will re-use it later.}
+  
+  \textcolor{red}{At each Exercise/question, describe how did you proceed to solve the problem.}
+\end{abstract}
+\section{Exercise 1}
+Neural networks for classification over Mnist dataset.
+\begin{enumerate}
+\item Install Keras. How?
+\item Download Mnist dataset from here: \url{https://sbelharbi.github.io/otherdocs/teaching2016-2017/ASI4/datasets/mnist.pkl.gz}
+\item How did you download it?
+\item Give a description of the dataset Mnist. (what are the pertinent information about this set?).
+\item Build different neural network models (using different number of hidden layers, different number of neurons). Start from smaller networks to bigger ones.
+\item What it the size of each model? (i.e. the total number of parameters)
+\item Train them using few/a lot of training examples. Do you see any over-fitting?. When you select only few samples samples, how did you do it? Save the model. Compare.
+\item Plot the training loss and validation loss. Describe your strategy for the learning rate. Plot the evolution of the learning rate. Use small/large learning rate. Comment. 
+\item When did you stop training? why?
+\item Find the best model for your problem. How did you do it?
+\item Load the saved models. Evaluate them.
+\item Use regularization. Is there a difference? how did you fix the regularization coefficient?
+\end{enumerate}
+
+\section{Exercise 2}
+Same questions as in Exercise 1, but this time you will build your own neural networks and you will train them by yourself using Theano.
+
+\end{document}
